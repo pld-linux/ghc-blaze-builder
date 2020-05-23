@@ -7,7 +7,7 @@ Summary:	Efficient buffered output
 Summary(pl.UTF-8):	Wydajne, buforowane wyjście
 Name:		ghc-%{pkgname}
 Version:	0.4.1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/blaze-builder
