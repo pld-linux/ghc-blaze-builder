@@ -6,13 +6,13 @@
 Summary:	Efficient buffered output
 Summary(pl.UTF-8):	Wydajne, buforowane wyjście
 Name:		ghc-%{pkgname}
-Version:	0.3.3.2
+Version:	0.4.1.0
 Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/blaze-builder
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	e43342e3275f2cddf9a3e403786fc520
+# Source0-md5:	c3cc5bdc46bd6e8bf5142cda2b0679b6
 URL:		http://hackage.haskell.org/package/blaze-builder
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-base >= 4
@@ -20,7 +20,7 @@ BuildRequires:	ghc-base < 5
 BuildRequires:	ghc-bytestring >= 0.9
 BuildRequires:	ghc-bytestring < 1
 BuildRequires:	ghc-text >= 0.10
-BuildRequires:	ghc-text < 1.2
+BuildRequires:	ghc-text < 1.3
 %if %{with prof}
 BuildRequires:	ghc-prof
 BuildRequires:	ghc-base-prof >= 4
@@ -28,7 +28,7 @@ BuildRequires:	ghc-base-prof < 5
 BuildRequires:	ghc-bytestring-prof >= 0.9
 BuildRequires:	ghc-bytestring-prof < 1
 BuildRequires:	ghc-text-prof >= 0.10
-BuildRequires:	ghc-text-prof < 1.2
+BuildRequires:	ghc-text-prof < 1.3
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 Requires(post,postun):	/usr/bin/ghc-pkg
@@ -38,7 +38,7 @@ Requires:	ghc-base < 5
 Requires:	ghc-bytestring >= 0.9
 Requires:	ghc-bytestring < 1
 Requires:	ghc-text >= 0.10
-Requires:	ghc-text < 1.2
+Requires:	ghc-text < 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -78,7 +78,7 @@ Requires:	ghc-base-prof < 5
 Requires:	ghc-bytestring-prof >= 0.9
 Requires:	ghc-bytestring-prof < 1
 Requires:	ghc-text-prof >= 0.10
-Requires:	ghc-text-prof < 1.2
+Requires:	ghc-text-prof < 1.3
 
 %description prof
 Profiling %{pkgname} library for GHC.  Should be installed when
@@ -130,27 +130,37 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES README* TODO %{name}-%{version}-doc/*
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HSblaze-builder-%{version}.o
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*.so
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Char
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Char/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Char/*.dyn_hi
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Compat
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Compat/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Compat/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Html
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Html/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Html/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Internal
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Internal/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Internal/*.dyn_hi
 
 %if %{with prof}
 %files prof
 %defattr(644,root,root,755)
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Char/*.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Compat/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Html/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze/ByteString/Builder/Internal/*.p_hi
 %endif
