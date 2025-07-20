@@ -133,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES README* TODO %{name}-%{version}-doc/*
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*.so
+%attr(755,root,root) %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*.so
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*.a
 %exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSblaze-builder-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Blaze
