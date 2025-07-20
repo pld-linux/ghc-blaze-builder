@@ -14,18 +14,21 @@ Group:		Development/Languages
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	c3cc5bdc46bd6e8bf5142cda2b0679b6
 URL:		http://hackage.haskell.org/package/blaze-builder
-BuildRequires:	ghc >= 6.12.3
+# with ghc < 8.0 also ghc-semigroups >=0.16 <0.19, with ghc < 7.8 also ghc-bytestring-buffer
+BuildRequires:	ghc >= 8.0
 BuildRequires:	ghc-base >= 4
 BuildRequires:	ghc-base < 5
-BuildRequires:	ghc-bytestring >= 0.9
+BuildRequires:	ghc-deepseq
+BuildRequires:	ghc-bytestring >= 0.10.4
 BuildRequires:	ghc-bytestring < 1
 BuildRequires:	ghc-text >= 0.10
 BuildRequires:	ghc-text < 1.3
 %if %{with prof}
-BuildRequires:	ghc-prof
+BuildRequires:	ghc-prof >= 8.0
+BuildRequires:	ghc-deepseq-prof
 BuildRequires:	ghc-base-prof >= 4
 BuildRequires:	ghc-base-prof < 5
-BuildRequires:	ghc-bytestring-prof >= 0.9
+BuildRequires:	ghc-bytestring-prof >= 0.10.4
 BuildRequires:	ghc-bytestring-prof < 1
 BuildRequires:	ghc-text-prof >= 0.10
 BuildRequires:	ghc-text-prof < 1.3
@@ -35,7 +38,7 @@ Requires(post,postun):	/usr/bin/ghc-pkg
 %requires_eq	ghc
 Requires:	ghc-base >= 4
 Requires:	ghc-base < 5
-Requires:	ghc-bytestring >= 0.9
+Requires:	ghc-bytestring >= 0.10.4
 Requires:	ghc-bytestring < 1
 Requires:	ghc-text >= 0.10
 Requires:	ghc-text < 1.3
@@ -75,7 +78,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ghc-base-prof >= 4
 Requires:	ghc-base-prof < 5
-Requires:	ghc-bytestring-prof >= 0.9
+Requires:	ghc-bytestring-prof >= 0.10.4
 Requires:	ghc-bytestring-prof < 1
 Requires:	ghc-text-prof >= 0.10
 Requires:	ghc-text-prof < 1.3
